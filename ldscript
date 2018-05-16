@@ -1,0 +1,37 @@
+OUTPUT_ARCH("riscv")
+
+ENTRY(_start)
+
+MEMORY
+{
+	sram (wxa!ri)  : ORIGIN = 0x80000000, LENGTH = 64K
+}
+
+SECTIONS
+{
+	. = 0x80000000;
+
+	.start . : {
+		*start.o(.text)
+	} > sram
+
+	.text : {
+		*(.text)
+	} > sram
+
+	.rodata : {
+		*(.rodata)
+	} > sram
+
+	.sdata : {
+		*(.sdata)
+	} > sram
+
+	.bss : {
+		*(.bss COMMON)
+	} > sram
+
+	. = ALIGN(4);
+
+	stack_top = . + 0x1000; /* 4kB of stack memory */
+}
