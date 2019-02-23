@@ -27,11 +27,8 @@ CFLAGS =	-O -pipe -g -nostdinc -fno-omit-frame-pointer		\
 	-Wundef -Wno-pointer-sign -Wno-format -Wmissing-include-dirs	\
 	-Wno-unknown-pragmas -Werror
 
-all:	compile link
+all:	__compile __link
 
-clean:
-	rm -f ${OBJECTS:M*} ${APP}.elf
+clean:	__clean
 
-.include "osfive/mk/user.mk"
-.include "osfive/mk/compile.mk"
-.include "osfive/mk/link.mk"
+.include "osfive/mk/bsd.mk"
