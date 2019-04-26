@@ -1,5 +1,5 @@
 APP =		mi-v-blinky-led
-ARCH =		riscv
+MACHINE =	riscv
 
 CC =		${CROSS_COMPILE}gcc
 LD =		${CROSS_COMPILE}ld
@@ -11,12 +11,10 @@ OBJECTS =	main.o						\
 		osfive/sys/riscv/microsemi/core_gpio.o		\
 		osfive/sys/riscv/microsemi/core_uart.o		\
 		osfive/sys/riscv/microsemi/core_timer.o		\
-		osfive/sys/kern/subr_prf.o			\
-		osfive/sys/kern/subr_console.o			\
-		osfive/lib/libc/stdio/printf.o			\
-		osfive/lib/libc/string/strlen.o			\
-		osfive/lib/libc/string/bzero.o			\
 		start.o
+
+KERNEL =
+LIBRARIES = libc
 
 CFLAGS =	-O -pipe -g -nostdinc -fno-omit-frame-pointer		\
 	-march=rv32g -mabi=ilp32 -fno-builtin-printf			\
@@ -27,8 +25,9 @@ CFLAGS =	-O -pipe -g -nostdinc -fno-omit-frame-pointer		\
 	-Wundef -Wno-pointer-sign -Wno-format -Wmissing-include-dirs	\
 	-Wno-unknown-pragmas -Werror
 
-all:	__compile __link
+all:	_compile _link
 
-clean:	__clean
+clean:	_clean
 
-include osfive/mk/gnu.mk
+include osfive/mk/default.mk
+include osfive/mk/gnu-toolchain.mk
