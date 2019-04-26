@@ -8,6 +8,7 @@ OBJCOPY =	${CROSS_COMPILE}objcopy
 LDSCRIPT =	${CURDIR}/ldscript
 
 OBJECTS =	main.o						\
+		osfive/sys/riscv/sifive/e300g_clint.o		\
 		osfive/sys/riscv/microsemi/core_gpio.o		\
 		osfive/sys/riscv/microsemi/core_uart.o		\
 		osfive/sys/riscv/microsemi/core_timer.o		\

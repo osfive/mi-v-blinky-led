@@ -26,6 +26,7 @@
 
 #include <sys/cdefs.h>
 #include <sys/console.h>
+#include <sys/thread.h>
 #include <sys/systm.h>
 
 #include <riscv/microsemi/core_uart.h>
@@ -82,6 +83,9 @@ void
 main(void)
 {
 	int i;
+
+	zero_bss();
+	md_init();
 
 	miv_init();
 
