@@ -7,6 +7,7 @@ OBJCOPY =	${CROSS_COMPILE}objcopy
 
 LDSCRIPT =	${CURDIR}/ldscript
 
+OBJDIR =	obj
 OBJECTS =	main.o						\
 		osfive/sys/riscv/sifive/e300g_clint.o		\
 		osfive/sys/riscv/microsemi/core_gpio.o		\
@@ -26,9 +27,10 @@ CFLAGS =	-O -pipe -g -nostdinc -fno-omit-frame-pointer		\
 	-Wundef -Wno-pointer-sign -Wno-format -Wmissing-include-dirs	\
 	-Wno-unknown-pragmas -Werror
 
-all:	_compile _link
+all:	${OBJDIR}/${APP}.elf
 
-clean:	_clean
+clean:
+	@rm -f ${OBJECTS} ${OBJDIR}/${APP}.elf
 
+include osfive/lib/libc/Makefile.inc
 include osfive/mk/default.mk
-include osfive/mk/gnu-toolchain.mk
